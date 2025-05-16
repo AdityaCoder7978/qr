@@ -1,0 +1,16 @@
+import qrcode
+
+def generate_qrcode(data, output_filename):
+    qr = qrcode.QRCode(
+        version=1,  # Controls the size of the QR code (1 is the smallest)
+        error_correction=qrcode.constants.ERROR_CORRECT_L,  # Controls the error correction level
+        box_size=10,  # Size of each box in the QR code
+        border=4,  # Thickness of the border (minimum is 4)
+    )
+    qr.add_data(data)
+    qr.make(fit=True)  # Fit the QR code to the given data
+    img = qr.make_image(fill="black", back_color="white")  # Generate the image with black foreground and white background
+    img.save(output_filename)  # Save the image to the output file
+
+# Example usage
+generate_qrcode("https://www.youtude.com", "qrcode_image.png")
